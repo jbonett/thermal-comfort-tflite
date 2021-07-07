@@ -1,9 +1,4 @@
-# Welcome to Comfort Monitor ##
-
-Author : Jonathan Bonett
-Created date : 2021-07-07 19:00:00
-Modify date  :  2021-07-07 19:00:00
-Description :  Thermal Comfort Model using Arduino Microcontroller and Tensorflow Lite, Web Interface connects to the device via BLE.
+# Welcome to Comfort Monitor
 
 ## Introduction
 The project has been created to predict the comfort level of an indoor area based on it's Temperature and Humidity. 
@@ -73,13 +68,13 @@ You can use different methods to run the files in a webserver, but to test it yo
 The comfort level is based on the Season you have setup in Arduino before you uploaded the firmware. 100 means it's perfect, 0 means it not that comfortable.
 
 Click the Connect Button as displayed below :
-![alt text](/screenshots/web_0.png "Connecting")
+> ![alt text](/screenshots/web_0.png "Connecting")
 
 Find the Arduino BLE device and click Pair :
-![alt text](/screenshots/web_1.png "Pairing")
+> ![alt text](/screenshots/web_1.png "Pairing")
 
 Below is the web application running :
-![alt text](/screenshots/web_2.png "Connected")
+> ![alt text](/screenshots/web_2.png "Connected")
 
 #### Data around the project
 Although there are various ways to measure comfortness, the data in this project is using a formula based on Predicted Mean Vote and Perdicted Percentage of Dissatisfied. More information can be found here https://en.wikipedia.org/wiki/Thermal_comfort
