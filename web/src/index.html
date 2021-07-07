@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Comfort Monitor</title>
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="main.css">
+    <script src="https://d3js.org/d3.v3.min.js" language="JavaScript"></script>
+    <script src="./liquidFillGauge.js" language="JavaScript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.2/p5.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.2/addons/p5.dom.min.js"></script>
+    <script src="https://unpkg.com/p5ble@0.0.4/dist/p5.ble.js"></script>
+    <script src="./scripts.js" language="JavaScript"></script>
+    <style>
+        .liquidFillGaugeText { font-family: Helvetica; font-weight: bold; }
+    </style>
+</head>
+<body>
+<div class="parent">
+<div class="div1"> </div>
+<div class="div2"> <div class="text-block">Comfort Level for&nbsp;<span><i id="is_winter" class="far fa-snowflake" style="display:none;"></i><i id="is_summer" class="fas fa-umbrella-beach" style="display:none;"></i></span><div class="bottom-text" style="display: none;">Click the Season Icon to Switch model</div></div> </div>
+<div class="div3"> </div>
+<div class="div4"> </div>
+<div class="div5"> <svg id="fillgauge1" width="97%" height="200"></svg><div class="text-block-4" id="tempHumVals"></div></div>
+<div class="div6"> </div>
+<div class="div7"> </div>
+<div class="div8"> 
+  <div onclick="connect(event)" id="connect_button">
+    <div class="button">
+      <a href="#" id="connect_button_text">Connect</a>
+    </div>
+  </div>
+  <div class="bottom-text" id="lastread"></div>
+</div> 
+<div class="div9"> </div>
+</div>
+<script language="JavaScript">
+    setGaugeValue(0);
+    isSummer();
+    clearLastRead();
+</script>
+</body>
+</html>

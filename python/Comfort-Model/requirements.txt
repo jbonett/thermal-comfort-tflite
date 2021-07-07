@@ -1,0 +1,6 @@
+tensorflow~=2.5.0
+numpy~=1.19.5
+pythermalcomfort~=1.6.0
+pandas~=1.2.4
+sklearn~=0.0
+scikit-learn~=0.24.2
