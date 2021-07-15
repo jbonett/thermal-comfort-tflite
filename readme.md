@@ -1,11 +1,18 @@
-# Welcome to Comfort Monitor
+# ![alt text](/screenshots/global_warming.jpeg "Fight Global Warming") Welcome to Comfort Monitor ![alt text](/screenshots/global_warming.jpeg "Fight Global Warming") 
 
+##### Help to Reduce Global Warming by controlling your Air Conditioning Energy Consumption in a Smarter Way!
+![](/videos/demo.gif)
+Running the model using an Arduino Nano 33 BLE Sense Chip and a Web application in a Chrome Browser
+###### Imagine a buildings fitted with this Comfort Prediction Model where Air Conditioning Temperature can be adjusted in a smarter way by taking into consideration the comfort level.
+
+![alt text](/screenshots/i2c.jpeg "i2c")
+Running the model on an ESP32 connected to an i2c 16x2 display
 ## Introduction
 The project has been created to predict the comfort level of an indoor area based on it's Temperature and Humidity. 
 
 Conceptually humans understand that the comfort level is based on just temperature and rarely take humidity in consideration as most air conditioning units do not provide this information.
 
-With the use of this project, you can program an Arduino BLE Sense device to detect what is the comfort level from 0-100, 100 being the most comfortable. This uses a predictable model based on the concept of Thermal Comfort.
+With the use of this project, you can program an Arduino Nano 33 BLE Sense device to detect what is the comfort level from 0-100, 100 being the most comfortable. This uses a predictable model based on the concept of Thermal Comfort.
 
 The library pythermalcomfort from Python is used to create data sheet for summer/winter models, then using a TensorFlow model, we generate a compiled model to be used on our Arduino Device. This has an accuracy loss of around 2-3% comfort level units against the real generate data, but in our case is good enough to deduce the comfort level of the area.
 
@@ -13,7 +20,7 @@ I hope the project will be useful for both home and office environments, and in 
 
 ## Installation
 #### Arduino
-To build the project you need to have Arduino ide setup, and your Arduino Ble Sense connected. Open the project inside the arduino folder, before starting you need to download the following libraries :
+To build the project you need to have Arduino ide setup, and your Arduino Nano 33 BLE Sense connected. Open the project inside the arduino folder, before starting you need to download the following libraries :
 ArduinoBLE - Bluetooth Low Energy Library
 Arduino_HTS221 - HTS221 Temperature and Humidity library
 EloquentTinyML - This is a library which has preset and configured the Tensorflow Lite packages required for Arduino, more information can be found here https://github.com/eloquentarduino/EloquentTinyML
@@ -56,11 +63,16 @@ The above parameters can be set to indicate the location of the original TF mode
 - convert_model.sh
 Finally this script(runs on linux/mac) will take the tflite file and convert it to .CC which this can be used in the Arduino IDE, you can see in the Arduino project how the model is stored inside the "model.h" file
 
-#### Arduino
-To install the project on your connected BLE Sense microcontroller, you need to make sure that the arduino device is connected, and select the appropriate port, then deploy to the device by clicking the Upload button from the tool bar. If you have any missing libraries you need to install them through library manager as explain in the installation section of this document.
+#### Arduino Nano 33 BLE Sense
+To install the project on your connected Arduino Nano 33 BLE Sense microcontroller, you need to make sure that the arduino device is connected, and select the appropriate port, then deploy to the device by clicking the Upload button from the tool bar. If you have any missing libraries you need to install them through library manager as explain in the installation section of this document.
 
 >int CURRENT_MODEL_TYPE = SUMMER;
 The above parameter can be set depending on what season it is, in this case SUMMER or WINTER
+
+#### Arduino Esp32
+Esp32 Version of the Code added in arduino/esp32/comfort_monitor, you would need an i2c 16x2 display and a DHT22 Temperature & Humidity monitor to build the system. Schematics for pins can be found based on the version of the hardware you have. But below you can find the pinout configuration for a widely used Esp32 chipset.
+
+![alt text](/screenshots/esp32_dht22_i2c_schematics.png "Schematics")
 
 #### Web
 You can use different methods to run the files in a webserver, but to test it you just need to load the index.html file in a browser which supports BLE, Chrome would be one of the best options. When the webpage loads, you need to make sure that the BLE Sense Arduino device is powered and near-by. Then click Connect, and you should see a dialog which will show the device to pair with. Pair with the device (usually it's named Comfort/Arduino), and wait for the values to start updating.
@@ -77,4 +89,13 @@ Below is the web application running :
 > ![alt text](/screenshots/web_2.png "Connected")
 
 #### Data around the project
-Although there are various ways to measure comfortness, the data in this project is using a formula based on Predicted Mean Vote and Perdicted Percentage of Dissatisfied. More information can be found here https://en.wikipedia.org/wiki/Thermal_comfort
+Although there are various ways to measure comfortness, the data in this project is using a formula based on Predicted Mean Vote and Predicted Percentage of Dissatisfied. More information can be found here https://en.wikipedia.org/wiki/Thermal_comfort
+
+#### Could this be done without using the TensorFlow Lite Machine Learning Model?
+The following questions can be raised, and an answer is provided for each one.
+> ###### Can we store the CSV files generated and we just read from them?
+> The size of the data for just one season i.e. Summer or Winter is of around 2Gigabytes, therefore we cannot store this data on the small amount of memory in a microcontroller. 
+> ###### Can we replicate the PMV & PPV formulas in an algorithm to be used in a Microcontroller?
+> Yes, they can be replicated if you know all the mathematics and parameters involved. But it's much easier and faster to generate a TensorFlow Model by training it on pre-populated data than building the algorithm from scratch. The pythermalcomfort (https://pypi.org/project/pythermalcomfort/) is used to generate this data quickly and easily.
+> ###### Can we read the data from the internet?
+> Yes, but it defeats the scope for running everything locally on the microcontroller device. Also to read the large amounts of data or execute the algorithm code you will need a server running on the internet.
