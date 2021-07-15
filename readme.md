@@ -2,6 +2,7 @@
 
 ##### Help to Reduce Global Warming by controlling your Air Conditioning Energy Consumption in a Smarter Way!
 ![](/videos/demo.gif)
+
 Running the model using an Arduino Nano 33 BLE Sense Chip and a Web application in a Chrome Browser
 ###### Imagine a buildings fitted with this Comfort Prediction Model where Air Conditioning Temperature can be adjusted in a smarter way by taking into consideration the comfort level.
 
